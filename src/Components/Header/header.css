@@ -1,0 +1,25 @@
+.titleContainer {
+  font-family: "Mr Dafoe", serif;
+  letter-spacing: 4px;
+  color: rgb(8, 8, 8);
+  z-index: 1;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.camera,
+.message {
+  color: rgb(24, 22, 22);
+  cursor: pointer;
+}
+.camera:hover,
+.message:hover {
+  color: rgb(109, 25, 126);
+  filter: drop-shadow(2px 2px 3px rgb(143, 151, 143));
+}
+
+header {
+  border-bottom: 1px solid rgb(214, 210, 210);
+}

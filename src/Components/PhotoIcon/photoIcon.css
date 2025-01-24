@@ -1,0 +1,9 @@
+button {
+  border: none;
+}
+
+.active {
+  fill: rgb(201, 4, 4);
+  stroke: rgb(201, 4, 4);
+  stroke-width: 1px;
+}
