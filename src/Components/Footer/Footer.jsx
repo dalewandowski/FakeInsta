@@ -1,5 +1,5 @@
 function Footer() {
-  return <>Footer lorem15</>;
+  return <footer>Footer</footer>;
 }
 
 export default Footer;

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import PhotoIcon from "../PhotoIcon/PhotoIcon";
+import User from "../User/User";
 import "./randomPosts.css";
 
 function RandomPosts() {
   const [photos, setPhotos] = useState("");
   const [loadingPhoto, setLoadingPhoto] = useState(true);
+  const [likes, setLikes] = useState({});
 
   let userLimit = Math.floor(Math.random() * 55 + 10);
   let randomPage = Math.floor(Math.random() * 15 + 1);
@@ -23,11 +25,24 @@ function RandomPosts() {
       .then((data) => {
         setPhotos(data);
         setLoadingPhoto(false);
+
+        let initialLikes = {};
+        data.forEach((photo) => {
+          initialLikes[photo.id] = Math.floor(Math.random() * 2500);
+        });
+        setLikes(initialLikes);
       })
       .catch((e) => {
         console.log("Couldn't get photos " + e);
         setLoadingPhoto(false);
       });
+  }
+
+  function handleLike(photoId, isLiked) {
+    setLikes((prevLikes) => ({
+      ...prevLikes,
+      [photoId]: prevLikes[photoId] + (isLiked ? 1 : -1),
+    }));
   }
 
   useEffect(() => {
@@ -45,14 +60,22 @@ function RandomPosts() {
       ) : (
         photos.map((data) => {
           return (
-            <div key={data.id} className="row mt-4">
-              <img
-                src={data.download_url}
-                alt={data.author}
-                className="w-100 h-100  overflow-scroll"
-              />
-              <PhotoIcon />
-            </div>
+            <>
+              <div className="row">
+                <User />
+              </div>
+              <div key={data.id} className="row mt-4">
+                <img
+                  src={data.download_url}
+                  alt={data.author}
+                  className="w-100 h-100  overflow-scroll"
+                />
+                <PhotoIcon
+                  onLike={(isLiked) => handleLike(data.id, isLiked)}
+                  likes={likes[data.id]}
+                />
+              </div>
+            </>
           );
         })
       )}
