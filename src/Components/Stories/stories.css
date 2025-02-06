@@ -18,8 +18,9 @@
 
 .storiesContainer {
   flex-wrap: nowrap;
-  overflow-x: hidden;
-  scrollbar-width: none;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: thin;
   scrollbar-color: rgb(233, 231, 231) rgb(255, 252, 252);
   position: relative;
 }

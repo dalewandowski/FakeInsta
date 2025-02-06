@@ -7,7 +7,7 @@ function Stories() {
   const { user, setUser, loading, setLoading } = useContext(Context);
 
   useEffect(() => {
-    getRandomUser(user, loading, setUser, setLoading);
+    getRandomUser(setUser, setLoading);
   }, []);
 
   return (

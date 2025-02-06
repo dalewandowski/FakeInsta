@@ -1,0 +1,10 @@
+.userProfile {
+  width: 40px;
+  height: 40px;
+  border: 3px solid black;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 600;
+}

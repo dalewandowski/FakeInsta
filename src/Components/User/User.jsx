@@ -1,29 +1,46 @@
-import { useEffect, useContext } from "react";
-import getRandomUser from "../../Functional/getRandomUser";
-import { Context } from "../../context/randomUserContext";
+import { useEffect, useState } from "react";
+import "./user.css";
 
 function User() {
-  const { user, setUser } = useContext(Context);
+  const [users, setUsers] = useState([]); // Ustawiamy domyślną wartość jako tablica
+  const url = "https://randomuser.me/api/?results=1";
+
+  function getUser() {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("SERVER ERROR: " + response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setUsers(data.results);
+      })
+      .catch((e) => console.log("Couldn't get users: " + e));
+  }
 
   useEffect(() => {
-    getRandomUser(user, setUser);
+    getUser();
   }, []);
 
   return (
     <div className="container">
-      USER
-      {/* {user.map((user) => (
-        <div className="row" key={user.login.uuid}>
-          <img
-            className=" col- rounded-circle"
-            style={{ width: "40px", height: "40px" }}
-            src={user.picture.large}
-            alt={user.name.first}
-          />
-          <p className="username row">{user.login.username}</p>
-        </div>
-      ))} */}
+      <div className="row">
+        {users.map((user) => (
+          <div className="col d-flex align-items-center " key={user.login.uuid}>
+            <div className="text-center">
+              <img
+                src={user.picture.medium}
+                alt={user.name.first}
+                className="rounded-circle my-2  userProfile"
+              />
+            </div>
+            <p className="username ms-2 m-auto">{user.login.username}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
+
 export default User;

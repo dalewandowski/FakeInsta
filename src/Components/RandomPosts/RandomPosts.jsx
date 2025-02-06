@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import PhotoIcon from "../PhotoIcon/PhotoIcon";
 import User from "../User/User";
+import Footer from "../Footer/Footer";
 import "./randomPosts.css";
 
 function RandomPosts() {
@@ -58,26 +59,27 @@ function RandomPosts() {
           </div>
         </div>
       ) : (
-        photos.map((data) => {
-          return (
-            <>
-              <div className="row">
-                <User />
-              </div>
-              <div key={data.id} className="row mt-4">
-                <img
-                  src={data.download_url}
-                  alt={data.author}
-                  className="w-100 h-100  overflow-scroll"
-                />
-                <PhotoIcon
-                  onLike={(isLiked) => handleLike(data.id, isLiked)}
-                  likes={likes[data.id]}
-                />
-              </div>
-            </>
-          );
-        })
+        photos.map((data) => (
+          <div
+            key={data.id}
+            className="container bg-light shadow-sm  rounded-3 mt-3 p-2"
+          >
+            <div className="row">
+              <User />
+            </div>
+            <div className="row">
+              <img
+                src={data.download_url}
+                alt={data.author}
+                className="w-100 h-100 overflow-scroll rounded-3"
+              />
+              <PhotoIcon
+                onLike={(isLiked) => handleLike(data.id, isLiked)}
+                likes={likes[data.id]}
+              />
+            </div>
+          </div>
+        ))
       )}
     </main>
   );

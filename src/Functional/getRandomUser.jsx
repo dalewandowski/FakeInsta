@@ -1,4 +1,4 @@
-function getRandomUser(user, loading, setUser, setLoading) {
+function getRandomUser(setUser, setLoading) {
   let randomResult = Math.floor(Math.random() * 35 + 50);
 
   const url = "https://randomuser.me/api/?results=" + randomResult;
