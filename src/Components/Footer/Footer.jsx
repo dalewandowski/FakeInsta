@@ -1,4 +1,4 @@
-import "./Footer.css";
+import "./footer.css";
 import { House, Search, SquarePlus, Film, User } from "lucide-react";
 
 function Footer() {
